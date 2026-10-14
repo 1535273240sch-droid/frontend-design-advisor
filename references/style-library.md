@@ -1,47 +1,31 @@
-# 风格库
+# 大厂级视觉风格配方库 (Big-Tech Style Archetypes)
 
-> 每种给出：气质、对标锚点、适用场景、可落地参数。
-> 色值是起点不是终点——按产品调主色，避免"所有产品一个样"。
+## 1. Linear / Raycast 暗黑精密工业风 (Dark Precision Craft)
+- 适用：AI 工具、开发者产品、效率软件、高频生产力工作台
+- Token：--bg-canvas: #08090A | --bg-surface-1: #101214 | --bg-surface-2: #17191C | --bg-glass: rgba(16,18,20,0.75) + blur(16px)
+- 文本与边框：--text-primary: #F4F5F8 | --text-secondary: #9599A3 | --border-subtle: rgba(255,255,255,0.07) | --accent-primary: #5E6AD2
+- 招牌阴影：inset 0 1px 0 0 rgba(255,255,255,0.09), 0 4px 16px -2px rgba(0,0,0,0.5)
 
-## 1. 暗色极简（对标 Linear）
-- 气质：冷静专业、信息密度高｜对标 Linear、Raycast、Vercel
-- 适合：开发者工具、AI 工具、效率 SaaS
-- 参数：背景 #0A0A0A（页面）/ #111113（卡片）；边框 1px rgba(255,255,255,0.08)；文字 #EDEDED（主）/ #8A8F98（次）；圆角 6–8px；不用阴影，靠边框和明度分层；正文 13–14px，字重 400/500，标题字距收紧
+## 2. Vercel Geist 瑞士国际主义建筑网格 (Architectural Monochrome Grid)
+- 适用：SaaS 官网、云平台控制台、数据监控看板、技术文档
+- Token：--bg-canvas: #FAFAFA | --bg-surface-1: #FFFFFF | --bg-surface-2: #F4F4F5 | --text-primary: #09090B | --border-subtle: #E4E4E7
+- 招牌技法：用暴露的 1px 纵横通栏分割线（Exposed Hairlines）代替独立阴影卡片，交界处点缀 7px "+" 号准星。
 
-## 2. 便当盒栅格
-- 气质：功能一目了然、精致有层次｜对标 Apple 产品页、Linear 首页
-- 适合：落地页功能介绍、看板首页
-- 参数：不等大的卡片严格对齐同一网格（如 12 列），间距 12–16px；圆角 16–24px，**不同层级用不同圆角**；每卡只讲一件事，有一张是视觉主角
+## 3. Stripe 弥散流光与多层白卡 (Luminous Layered FinTech)
+- 适用：金融科技、企业级 SaaS、支付结算后台、高信任度商业首页
+- Token：--bg-canvas: #F6F9FC | --bg-surface-1: #FFFFFF | --text-primary: #0A2540（深海藏青黑） | --accent-primary: #635BFF
+- 招牌阴影：0 0 0 1px rgba(10,37,64,0.05), 0 2px 4px rgba(10,37,64,0.04), 0 12px 28px -4px rgba(10,37,64,0.08)
 
-## 3. 毛玻璃
-- 气质：通透轻盈现代｜对标 macOS Big Sur 之后、iOS 控制中心
-- 适合：浮层、弹窗、侧边栏
-- 参数：半透明背景 rgba(255,255,255,0.08–0.18) + 模糊 16–24px；1px 半透明白描边；**背景必须有彩色渐变或图像，否则无意义**；只用于少数浮层，别全页铺满，注意文字对比度
+## 4. Apple HIG / Craft 原生温润材质风 (Tactile Native & Translucent Glass)
+- 适用：消费级应用、效率笔记、教育刷题工具、iOS/macOS 风格 Web App
+- Token：--bg-canvas: #F5F5F7 | --bg-surface-1: #FFFFFF | --bg-glass: rgba(255,255,255,0.72) + saturate(180%) blur(20px) | --accent-primary: #0071E3
+- 圆角：大卡片 20px，内部模块 12px，分段控制器外 10px / 内 7px
 
-## 4. 新野兽派
-- 气质：有个性、玩味、年轻｜对标 Gumroad、Figma 社区插件页
-- 适合：独立开发者产品、创意工具、年轻人应用
-- 参数：2–3px 纯黑边框；硬阴影 4px 4px 0 #000（无模糊）；高饱和撞色 + 米白/纯白底；字体粗壮，按钮点击时阴影"压下去"
+## 5. Notion / Readwise 温暖人文社论风 (Warm Editorial & Knowledge)
+- 适用：AI 写作工具、知识库、阅读器、个人博客与深度内容平台
+- Token：--bg-canvas: #FBF9F5 | --bg-surface-1: #F4F0EA | --text-primary: #191918 | --accent-primary: #D95D39
+- 字体：标题使用人文衬线体（Newsreader / Songti SC），正文使用无衬线体
 
-## 5. 经典极简白
-- 气质：可信赖、亲和、专业｜对标 Stripe、Notion
-- 适合：支付金融、文档工具、企业官网、教育
-- 参数：白底 #FFFFFF + 冷灰辅助底 #F8FAFC；文字 #0F172A / #475569；大量留白；柔和弥散阴影 0 10px 40px rgba(15,23,42,0.06)；圆角 8–12px；单一主色克制使用
-
-## 6. 阅读友好（编辑排版风）
-- 气质：安静、专注文字｜对标 Notion 文档页、优质博客
-- 适合：小说/文章读写工具、知识库
-- 参数：正文宽度 ≤ 68–72 字符（中文约 30–36 字/行），行高 1.7–1.9；暖白或柔灰护眼背景，可提供多档主题；装饰近乎为零，层级靠字号与间距
-
-## 7. 企业中后台
-- 气质：严谨高效、信息密度大｜对标 Ant Design、Tabler
-- 适合：管理系统、数据密集业务
-- 参数：8px 栅格；表格行高 40–48px；状态用语义色（成功/警告/错误）；主色一个，其余中性灰
-
-## 选风格提示
-- "高级、科技感" → 优先 1，要冲击力再加 Magic UI / Aceternity 效果
-- "年轻、好玩" → 4
-- "专业、可信" → 5
-- "做给自己用的工具" → 1 或 5，克制最重要
-- 阅读/写作类 → 6，再叠 1 或 5 的外壳
-- 手机端 → 圆角偏大、触控区 ≥ 44px、底部导航，取 5 或 2 的轻量版
+## 6. 飞书 / Arco Design 高效企业生产力风 (High-Density Enterprise Workspace)
+- 适用：B 端复杂业务中台、CRM/ERP、多维表格、高密度数据分析系统
+- Token：--bg-canvas: #F2F3F5 | --bg-surface-1: #FFFFFF | --text-primary: #1D2129 | --border-subtle: #E5E6EB | --accent-primary: #165DFF
