@@ -41,3 +41,5 @@
 ## 5. 微交互动力学参数 (Micro-Physics & Easing)
 - 高频反馈时长控制在 140ms–180ms，使用 cubic-bezier(0.22, 1, 0.36, 1) 或 Spring (stiffness: 420, damping: 32, mass: 0.8)。
 - 按钮点击态：active:scale-[0.98]；卡片悬浮态严禁大幅度上跳，仅做边框提亮与背景微亮。
+
+具体到每个交互场景（按压 / 状态切换 / 加载 / 列表入场）的时长、曲线与红线，见 references/motion-cookbook.md。

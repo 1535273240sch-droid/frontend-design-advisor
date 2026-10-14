@@ -1,0 +1,160 @@
+/* ============================================================================
+   frontend-design-advisor · Token 底座 (Design Token Base)
+   ----------------------------------------------------------------------------
+   用法：复制本文件为项目的 src/styles/tokens.css，在应用入口最早处引入
+        （早于任何业务组件样式）。先落地本底座，再写业务组件；
+        严禁在业务组件中散落硬编码色值。
+
+   默认暗色主题；给 <html data-theme="light"> 即切换浅色。
+   本文件为纯 CSS，不依赖任何框架；Tailwind 桥接见 tailwind-theme.css。
+   五条物理法则的完整说明见 references/design-physics.md。
+   ============================================================================ */
+
+/* ---------------------------------------------------------------- 1. 暗色（默认） */
+:root {
+  color-scheme: dark;
+
+  /* 表面海拔：越靠近用户的层级越亮，绝不用纯黑 */
+  --bg-canvas:      #08090A;   /* Level 0 底层画布 */
+  --bg-surface-1:   #101214;   /* Level 1 卡片 / 侧边栏 / 表格容器 */
+  --bg-surface-2:   #17191C;   /* Level 2 Hover / 激活项 / 下拉 / 代码块 */
+  --bg-glass:       rgba(16, 18, 20, 0.75); /* Level 3 毛玻璃浮层 */
+  --bg-hover:       rgba(255, 255, 255, 0.04);
+  --bg-active:      rgba(255, 255, 255, 0.07);
+
+  /* 文本灰度阶梯 */
+  --text-primary:   #F4F5F8;   /* 100% 主标题与正文 */
+  --text-secondary: #9599A3;   /* 65%–72% 副文本 */
+  --text-muted:     #6E7178;   /* 45%–50% 弱化 / 占位 */
+
+  /* 边框：Alpha 细框；聚焦用品牌色半透明环 */
+  --border-subtle:  rgba(255, 255, 255, 0.07);
+  --border-strong:  rgba(255, 255, 255, 0.16);
+  --ring-focus:     rgba(94, 106, 210, 0.55);
+
+  /* 品牌主色：全站面积 ≤ 10% */
+  --accent-primary: #5E6AD2;
+  --accent-hover:   #6E79DD;
+  --accent-fg:      #FFFFFF;
+
+  /* 语义状态：12% 透明度底 + 20% 边 + 高明度同色系字 */
+  --success:    #3FB950; --success-bg: rgba(63, 185, 80, 0.12);  --success-bd: rgba(63, 185, 80, 0.20);
+  --warning:    #D29922; --warning-bg: rgba(210, 153, 34, 0.12); --warning-bd: rgba(210, 153, 34, 0.20);
+  --danger:     #F85149; --danger-bg:  rgba(248, 81, 73, 0.12);  --danger-bd:  rgba(248, 81, 73, 0.20);
+  --info:       #58A6FF; --info-bg:    rgba(88, 166, 255, 0.12); --info-bd:    rgba(88, 166, 255, 0.20);
+
+  /* 复合阴影：多层环境光弥散 + 1px 顶部内高光 */
+  --shadow-card:    inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.40), 0 8px 24px -4px rgba(0, 0, 0, 0.35);
+  --shadow-popover: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.45), 0 16px 40px -8px rgba(0, 0, 0, 0.55);
+  --shadow-glass:   0 8px 32px -8px rgba(0, 0, 0, 0.55);
+
+  /* 几何：同心圆角阶梯，务必满足 R_inner = R_outer - Padding */
+  --radius-lg: 14px;   /* 外层卡片 */
+  --radius-md: 8px;    /* 内嵌模块 / 按钮 */
+  --radius-sm: 5px;    /* 标签 / 徽标 */
+
+  /* 微交互动力学：高频反馈 140–180ms */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-base: 160ms;
+
+  /* 间距节奏：宏观留白 ≥ 3× 微观留白 */
+  --space-1: 8px;  --space-2: 12px; --space-3: 20px; --space-4: 28px;
+  --space-module: 64px; --space-section: 112px;
+}
+
+/* ---------------------------------------------------------------- 2. 浅色主题 */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-canvas:      #FAFAFA;
+  --bg-surface-1:   #FFFFFF;
+  --bg-surface-2:   #F4F4F5;
+  --bg-glass:       rgba(255, 255, 255, 0.72);
+  --bg-hover:       rgba(0, 0, 0, 0.03);
+  --bg-active:      rgba(0, 0, 0, 0.06);
+
+  --text-primary:   #09090B;
+  --text-secondary: #52525B;
+  --text-muted:     #8A8A93;
+
+  --border-subtle:  rgba(0, 0, 0, 0.08);
+  --border-strong:  rgba(0, 0, 0, 0.16);
+
+  /* 浅色模式用多层环境影代替内高光 */
+  --shadow-card:    0 0 0 1px rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
+  --shadow-popover: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 6px 16px -4px rgba(0, 0, 0, 0.10), 0 20px 40px -12px rgba(0, 0, 0, 0.12);
+  --shadow-glass:   0 8px 32px -8px rgba(0, 0, 0, 0.14);
+}
+
+/* ---------------------------------------------------------------- 3. 全局基线 */
+* { border-color: var(--border-subtle); }
+
+body {
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------------------------------------------------------------- 4. 光学字阶 */
+/* 字号越大字距越紧；全大写小标签反之放宽 */
+.text-hero    { font-size: 48px; line-height: 1.10; letter-spacing: -0.035em; }
+.text-h1      { font-size: 30px; line-height: 1.20; letter-spacing: -0.025em; }
+.text-h2      { font-size: 21px; line-height: 1.30; letter-spacing: -0.015em; }
+.text-body    { font-size: 15px; line-height: 1.65; letter-spacing: 0; }
+.text-eyebrow { font-size: 12px; line-height: 1.4; letter-spacing: 0.07em; font-weight: 600; text-transform: uppercase; }
+
+/* ---------------------------------------------------------------- 5. 工具类 */
+/* 数字与表格强制等宽，杜绝跳动 */
+.tnum, table { font-variant-numeric: tabular-nums; }
+
+/* 正文最佳阅读行宽 60–72ch */
+.prose-measure { max-width: 68ch; }
+
+/* 卡片：海拔表面 + Alpha 细框 + 复合光影 */
+.surface-card {
+  background: var(--bg-surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* 毛玻璃浮层 */
+.glass {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* 1px 暴露建筑分割线网格（替代独立阴影卡片） */
+.hairline-grid { gap: 1px; background: var(--border-subtle); border: 1px solid var(--border-subtle); }
+.hairline-grid > * { background: var(--bg-surface-1); }
+
+/* 交互态：精确过渡属性，禁止 transition-all；悬浮仅提亮，不上跳 */
+.pressable {
+  transition: background-color var(--dur-base) var(--ease-out-quint),
+              border-color var(--dur-base) var(--ease-out-quint),
+              transform var(--dur-fast) var(--ease-out-quint);
+}
+.pressable:hover  { background: var(--bg-hover); border-color: var(--border-strong); }
+.pressable:active { transform: scale(0.98); }
+
+/* 键盘聚焦双环（Focus-Visible） */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg-canvas), 0 0 0 4px var(--ring-focus);
+}
+
+/* 无障碍：尊重系统减弱动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -18,7 +18,7 @@ description: 用户想做/开发任何带界面的产品时使用——网站、
 用 1–2 句话说清“做什么、给谁用、高频核心场景是什么、应该传达什么产品气质”。用户已明确的信息直接收敛，绝不重复提问。
 
 ### 2. 提问（≤4 个，一次问完）
-优先使用选项式提问工具（如 ask_user_question），每题 2–4 个互斥选项，并标出你的 [推荐] 默认项及半句理由。若无提问工具则输出编号列表，并说明“不确定可直接回复‘按推荐来’”。
+优先使用选项式提问工具（如 AskUserQuestion），每题 2–4 个互斥选项，并标出你的 [推荐] 默认项及半句理由。若无该工具则输出编号列表，并说明“不确定可直接回复‘按推荐来’”。
 
 题库（按需挑选未知维度，已知维度直接跳过）：
 1. 终端与形态：桌面 Web 优先 / 手机 H5（支持添加到桌面） / 跨平台桌面客户端 / 小程序或原生 App
@@ -47,10 +47,11 @@ description: 用户想做/开发任何带界面的产品时使用——网站、
 5. 反 AI 模板自审记录：写码前强制对照 references/anti-patterns.md 审查简报，主动列出“本次刻意规避的 3 个 AI 默认俗套做法及替代方案”。
 
 ### 5. 开发实现（Token 底座先行，再写业务组件）
-1. 第一步必须先落地全局样式契约（globals.css / Tailwind Theme）：将简报中的海拔色阶、Alpha 边框、复合阴影、圆角阶梯、弹簧缓动变量写入全局 CSS 变量，严禁在业务组件中散落硬编码色值。
+1. 第一步先落地全局 Token 底座：直接复制 templates/tokens.css（暗/浅双主题 + 4 层海拔 + Alpha 边框 + 复合阴影 + 圆角阶梯 + 动效变量 + 工具类）作为起点，按简报替换具体色值；用 Tailwind 的项目再引入 templates/tailwind-theme.css 桥接成原子类。严禁在业务组件中散落硬编码色值。
 2. 严守光学与几何物理规范（见 references/design-physics.md）：嵌套容器严格执行同心圆角减法；所有数字强制添加 tabular-nums；图标 stroke-width 全站统一。
 3. 5 态完整度：核心交互区域必须同时具备 Default、Hover、Active（0.98 缩放按压感）、Focus-Visible（键盘双环聚焦）以及 Empty / Loading Skeleton。
 4. 真实业务语境文案：严禁出现“功能一 / 功能二”“Lorem ipsum”等假大空口号。
+5. 动效参数一律取自 references/motion-cookbook.md（时长、缓动、弹簧、入场编排），禁止临时拍脑袋；必须精确指定过渡属性，禁用 transition-all。
 
 ### 6. 像素级自检与交付
-对照 references/quality-checklist.md 与 references/anti-patterns.md 逐项核验。交付时简明扼要说明核心视觉亮点、启动命令与 2–3 个可进一步深化的定制锚点。
+对照 references/quality-checklist.md、references/anti-patterns.md 与 references/motion-cookbook.md 的硬红线逐项核验。交付时简明扼要说明核心视觉亮点、启动命令与 2–3 个可进一步深化的定制锚点。

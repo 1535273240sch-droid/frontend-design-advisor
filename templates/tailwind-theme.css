@@ -1,0 +1,79 @@
+/* ============================================================================
+   frontend-design-advisor · Tailwind 桥接 (Token → 原子类)
+   ----------------------------------------------------------------------------
+   作用：把 templates/tokens.css 里的 CSS 变量映射成 Tailwind 原子类，
+        这样业务代码写的是 bg-surface-1 / text-muted / rounded-lg，
+        而真正的色值仍集中在 tokens.css 一处，满足"零硬编码色值"验收项。
+
+   引入顺序：tokens.css → tailwind-theme.css → 你的 @tailwind 指令。
+   仅 Tailwind v4 支持 @theme。v3 用法见文件末尾注释。
+   ============================================================================ */
+
+@theme inline {
+  /* 颜色 */
+  --color-canvas:    var(--bg-canvas);
+  --color-surface-1: var(--bg-surface-1);
+  --color-surface-2: var(--bg-surface-2);
+  --color-glass:     var(--bg-glass);
+  --color-subtle:    var(--border-subtle);
+  --color-strong:    var(--border-strong);
+
+  --color-primary:   var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted:     var(--text-muted);
+
+  --color-accent:    var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger:  var(--danger);
+  --color-info:    var(--info);
+
+  /* 圆角阶梯 */
+  --radius-lg: var(--radius-lg);
+  --radius-md: var(--radius-md);
+  --radius-sm: var(--radius-sm);
+
+  /* 光影 */
+  --shadow-card:    var(--shadow-card);
+  --shadow-popover: var(--shadow-popover);
+
+  /* 动效 */
+  --ease-out-quint: var(--ease-out-quint);
+
+  /* 间距节奏 */
+  --spacing-module:  var(--space-module);
+  --spacing-section: var(--space-section);
+}
+
+/* 映射后即可使用：
+   <div class="bg-surface-1 border border-subtle rounded-lg shadow-card text-primary">
+   <span class="text-muted text-h2">…</span>
+   <button class="pressable focus-ring bg-accent text-white rounded-md">…</button>
+*/
+
+/* ---------------------------------------------------------------------------
+   Tailwind v3 用户改用 tailwind.config.js（值同样指向 CSS 变量，勿写死色值）：
+
+   export default {
+     theme: {
+       extend: {
+         colors: {
+           canvas:    'var(--bg-canvas)',
+           'surface-1': 'var(--bg-surface-1)',
+           'surface-2': 'var(--bg-surface-2)',
+           subtle:    'var(--border-subtle)',
+           strong:    'var(--border-strong)',
+           primary:   'var(--text-primary)',
+           secondary: 'var(--text-secondary)',
+           muted:     'var(--text-muted)',
+           accent:    'var(--accent-primary)',
+         },
+         borderRadius: { lg: 'var(--radius-lg)', md: 'var(--radius-md)', sm: 'var(--radius-sm)' },
+         boxShadow:    { card: 'var(--shadow-card)', popover: 'var(--shadow-popover)' },
+         transitionTimingFunction: { 'out-quint': 'var(--ease-out-quint)' },
+       },
+     },
+   }
+--------------------------------------------------------------------------- */
